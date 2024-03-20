@@ -10,23 +10,15 @@ function resolve (dir) {
 }
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   stats: 'minimal',
   entry: resolve('src/main.js'),
   output: {
-    filename: '[name].js',
-    publicPath: '/'
-  },
-  cache: {
-    type: 'filesystem'
+    clean: true,
+    filename: 'static/js/[name].[contenthash:8].js',
+    path: path.join(__dirname,'../dist/'),
   },
   devtool: 'eval-source-map',
-  devServer: {
-    hot: true,
-    static: {},
-    port: 8888,
-    host: 'localhost'
-  },
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
@@ -88,12 +80,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new EslintWebpackPlugin({
-      context: path.resolve(__dirname, '../src'),
-      exclude: 'node_modules',
-      extensions: ['vue', 'js'],
-      cache: true
-    }),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       minify: {
