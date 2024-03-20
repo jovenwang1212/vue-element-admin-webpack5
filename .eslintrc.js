@@ -1,29 +1,33 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module'
+    parser: '@babel/eslint-parser',
+    sourceType: 'module',
+    ecmaVersion: 6,
+    // 如果有需要，可以启用特定的语言特性支持
+    ecmaFeatures: {
+      jsx: true, // 如果你的项目包含 JSX
+      impliedStrict: false, // 启用严格模式（'use strict'）
+      globalReturn: false, // 是否允许在全局作用域下返回值
+    },
   },
   env: {
     browser: true,
     node: true,
     es6: true,
   },
-  extends: ['plugin:vue/recommended', 'eslint:recommended'],
+  extends: ['plugin:vue/essential', 'eslint:recommended'],
+  plugins: ['vue'],
 
   // add your custom rules here
   //it is base on https://github.com/vuejs/eslint-config-vue
   rules: {
-    "vue/max-attributes-per-line": [2, {
-      "singleline": 10,
-      "multiline": {
-        "max": 1,
-        "allowFirstLine": false
-      }
-    }],
+    "vue/no-mutating-props": "off",
+    "vue/max-attributes-per-line": "off",
+    "vue/name-property-casing": "off",
+    "vue/multi-word-component-names": "off",
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline":"off",
-    "vue/name-property-casing": ["error", "PascalCase"],
     "vue/no-v-html": "off",
     'accessor-pairs': 2,
     'arrow-spacing': [2, {
